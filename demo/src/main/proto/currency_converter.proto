@@ -1,0 +1,22 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.currency.converter";
+option java_outer_classname = "CurrencyConverterProto";
+
+service CurrencyConverter {
+  rpc Convert (ConversionRequest) returns (ConversionResponse);
+}
+
+message ConversionRequest {
+  string source_currency = 1;
+  string target_currency = 2;
+  double amount = 3;
+}
+
+message ConversionResponse {
+  double rate = 1;
+  double converted_amount = 2;
+  string message = 3;
+}
