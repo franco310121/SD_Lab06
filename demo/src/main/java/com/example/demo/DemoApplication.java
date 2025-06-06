@@ -2,7 +2,6 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import org.springframework.boot.CommandLineRunner;
@@ -16,16 +15,16 @@ public class DemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// Iniciar el servidor gRPC en un hilo separado
-		Server server = ServerBuilder.forPort(9091)
-				.addService(new CurrencyConverterServiceImpl()) // Asegúrate de tener la implementación del servicio aquí
-				.build();
+		try {
+			Server server = ServerBuilder.forPort(9091)
+					.addService(new CurrencyConverterServiceImpl())
+					.build()
+					.start();
 
-		System.out.println("Servidor gRPC iniciado en el puerto 9091...");
-		server.start();
-
-		// Esperar que el servidor termine
-		server.awaitTermination();
+			System.out.println("Servidor gRPC iniciado en el puerto 9091...");
+			server.awaitTermination();
+		} catch (Exception e) {
+			System.err.println("Error al iniciar el servidor gRPC: " + e.getMessage());
+		}
 	}
-
 }

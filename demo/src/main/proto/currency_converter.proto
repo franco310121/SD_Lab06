@@ -20,3 +20,4 @@ message ConversionResponse {
   double converted_amount = 2;
   string message = 3;
 }
+
