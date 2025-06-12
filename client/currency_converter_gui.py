@@ -33,7 +33,7 @@ currency_options = {
 
 def convert_currency(source_currency, target_currency, amount):
     try:
-        channel = grpc.insecure_channel('localhost:9091')
+        channel = grpc.insecure_channel('161.132.45.205:9091')
         stub = currency_converter_pb2_grpc.CurrencyConverterStub(channel)
         request = currency_converter_pb2.ConversionRequest(
             source_currency=source_currency,
